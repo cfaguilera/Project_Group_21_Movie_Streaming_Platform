@@ -39,7 +39,7 @@ app.post("/getmovie", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
     let isValid = await streamDB.query("SELECT * FROM users WHERE username='" + req.body.username + "'");
-    if (isValid.rows == undefined || req.body.pw == "")
+    if (isValid.rows[0] != undefined || req.body.pw == "")
     {
         console.log("username exists")
         res.json({"valid": "false"});

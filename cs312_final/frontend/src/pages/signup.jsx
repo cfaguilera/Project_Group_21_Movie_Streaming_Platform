@@ -21,7 +21,8 @@ function SignUp() {
         }
 
         axios.post("http://localhost:8000/signup", info).then((res) => {
-            if (res.valid == "true")
+            console.log(res.data.valid)
+            if (res.data.valid == "true")
             {
                 navigate("/", {state: {user: username}});
             }
