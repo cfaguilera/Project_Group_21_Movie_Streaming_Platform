@@ -14,7 +14,7 @@ function WebPlayer() {
                 <br/>
                 <br/>
                 <h1>Web player</h1>
-                {/*
+                {/* sample video player
                 <h2>Movie Title</h2>
                 <video width="90%" height="50%" controls>
                     <source src={testVideo} type="video/mp4" id="MovieSource"/>Your browser does not support this video.
