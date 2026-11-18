@@ -24,7 +24,7 @@ function Catalog() {
 
     return (
         <>
-            <NavBar />
+            <NavBar user= {user}/>
             <h1>Our Catalog</h1>
             <br />
             <div className="movieCatalog">

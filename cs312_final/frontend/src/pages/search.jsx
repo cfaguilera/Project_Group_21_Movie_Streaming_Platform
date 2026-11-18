@@ -1,10 +1,16 @@
 import NavBar from "../components/navBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Search() {
     const navigate = useNavigate();
+    const location = useLocation();
+    let user = null;
+    if (location.state != null)
+    {
+        user = location.state.user;
+    }
     return ( <>
-        <NavBar />
+        <NavBar user={user}/>
         <h1>Search results</h1>
         <h2 id="searchQuery">Movie name</h2>
 
