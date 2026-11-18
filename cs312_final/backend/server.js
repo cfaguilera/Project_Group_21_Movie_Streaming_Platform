@@ -9,7 +9,7 @@ const streamDB = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "streamingdb",
-    password: "SixSeven67!",
+    password: "CLU2",
     port: 5432,
 });
 const app = express();
@@ -67,11 +67,12 @@ app.post("/login", async (req, res) => {
     else
     {
         let correctPw = await streamDB.query("SELECT password FROM users WHERE username='" + req.body.username + "'");
-        if (correctPw.rows != undefined)
+        if (correctPw.rows[0] != undefined)
         {
             if (correctPw.rows[0].password == req.body.password)
             {
                 res.json({"valid": "true"});
+                return;
             }
         }
         
@@ -80,7 +81,16 @@ app.post("/login", async (req, res) => {
 
 })
 
-
+app.post("/checkpref", async (req, res) => {
+    let checkPref = await streamDB.query("SELECT genrepref FROM users WHERE username='" + req.body.user + "'");
+    console.log(checkPref.rows[0].genrepref);
+    if (checkPref.rows[0].genrepref != null)
+    {
+        res.json({"genre": checkPref.rows[0].genrepref})
+        return;
+    }
+    res.json({"genre": "none"})
+})
 
 
 app.listen(port, () => {

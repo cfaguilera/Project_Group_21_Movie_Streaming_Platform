@@ -1,8 +1,9 @@
 import NavBar from "../components/navBar";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function SignIn() {
-
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     function changeUsernameInput(event) {
         setUsername(event.target.value);
@@ -19,6 +20,10 @@ function SignIn() {
 
         axios.post("http://localhost:8000/login", info).then((res) => {
             console.log(res.data);
+            if (res.data.valid == "true")
+            {
+                navigate("/", {state: {user: username}});
+            }
         })
 
         
