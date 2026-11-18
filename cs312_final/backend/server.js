@@ -9,7 +9,7 @@ const streamDB = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "streamingdb",
-    password: "CLU2",
+    password: "RawNetherite17!",
     port: 5432,
 });
 const app = express();
@@ -36,6 +36,8 @@ app.post("/getmovie", async (req, res) => {
 
 
 });
+
+
 
 app.post("/signup", async (req, res) => {
     let isValid = await streamDB.query("SELECT * FROM users WHERE username='" + req.body.username + "'");
@@ -90,6 +92,16 @@ app.post("/checkpref", async (req, res) => {
         return;
     }
     res.json({"genre": "none"})
+})
+
+app.get("/movies", async (req, res) => {
+    try {
+        const result = await streamDB.query("SELECT * from public.movies");
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: "Failed to retrieve movies"});
+    }
 })
 
 
