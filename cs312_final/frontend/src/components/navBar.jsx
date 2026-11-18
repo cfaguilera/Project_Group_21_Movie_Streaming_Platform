@@ -6,8 +6,8 @@ function NavBar(props) {
   return (
     <div>
         <nav>
-          <Link to="/" id="navP">Boomer Streaming</Link>
-          <button id="navCatalog" onClick={function() {navigate("/catalog")}}>Our Catalog</button>
+          <button id="navP" onClick={function() {navigate("/", {state: {user: props.user}})}}>Boomer Streaming</button>
+          <button id="navCatalog" onClick={function() {navigate("/catalog", {state: {user: props.user}})}}>Our Catalog</button>
           {(props.user === null || props.user === undefined) ? (
             <div id="signins">
               <Link to="/signup">Sign up</Link>
@@ -21,7 +21,7 @@ function NavBar(props) {
             
             <form className="navSearchForm" role="search" action="/search" method="get">
               <input id="navSearch" type="search" placeholder="Search..." aria-label="Search movies" name="q"/>
-              <button type="submit" id="searchButton" onClick={function() {navigate("/search")}}>Search</button>
+              <button type="submit" id="searchButton" onClick={function() {navigate("/search", {state: {user: props.user}})}}>Search</button>
             </form>
           </div>
         </nav>
