@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import HomePage from  './pages/homePage.jsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
@@ -8,7 +7,6 @@ import SignIn from './pages/signin.jsx';
 import Catalog from './pages/catalog.jsx';
 import Search from './pages/search.jsx';
 import Questionnaire from './pages/questionaaire.jsx';
-
 
 function App() {
 

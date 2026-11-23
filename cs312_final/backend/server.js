@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
 
 })
 
-    
+
 app.post("/checkpref", async (req, res) => {
     let checkPref = await streamDB.query("SELECT genrepref FROM users WHERE username='" + req.body.user + "'");
     console.log(checkPref.rows[0].genrepref);
@@ -96,13 +96,9 @@ app.post("/checkpref", async (req, res) => {
 })
 
 app.get("/movies", async (req, res) => {
-    try {
-        const result = await streamDB.query("SELECT * from public.movies");
-        res.json(result.rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "Failed to retrieve movies"});
-    }
+    const search = typeof req.query.search === 'string' ? req.query.search.trim(): "";
+    const result = search ? await streamDB.query("SELECT * FROM public. movies WHERE strpos(lower(title), lower($1)) > 0", [search]) : await streamDB.query("SELECT * FROM public.movies")
+    res.json(result.rows);
 })
 
 
