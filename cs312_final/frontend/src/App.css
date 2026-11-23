@@ -504,6 +504,9 @@ body {
   justify-content: space-between;
   gap: 24px;
   min-height: 156px;
+  border: 2px solid lightcyan;
+  margin-bottom: 25px;
+  padding: 25px;
 }
 
 #reviewTop {

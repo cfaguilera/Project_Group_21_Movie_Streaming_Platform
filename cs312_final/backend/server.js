@@ -9,7 +9,7 @@ const streamDB = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "streamingdb",
-    password: "RawNetherite17!",
+    password: "CLU2",
     port: 5432,
 });
 const app = express();
@@ -86,13 +86,18 @@ app.post("/login", async (req, res) => {
     
 app.post("/checkpref", async (req, res) => {
     let checkPref = await streamDB.query("SELECT genrepref FROM users WHERE username='" + req.body.user + "'");
-    console.log(checkPref.rows[0].genrepref);
-    if (checkPref.rows[0].genrepref != null)
-    {
-        res.json({"genre": checkPref.rows[0].genrepref})
-        return;
+    //console.log(checkPref.rows[0].genrepref);
+    try {
+        if (checkPref.rows[0].genrepref != null)
+        {
+            res.json({"genre": checkPref.rows[0].genrepref})
+            return;
+        }
     }
-    res.json({"genre": "none"})
+    catch (error)
+    {
+        res.json({"genre": "none"})
+    }
 })
 
 app.get("/movies", async (req, res) => {
@@ -104,8 +109,17 @@ app.get("/movies", async (req, res) => {
         res.status(500).json({error: "Failed to retrieve movies"});
     }
 })
+app.post("/getreviews", async (req, res) => {
+    
 
+    const allReviews = await streamDB.query("SELECT * FROM reviews WHERE movie_id='" + req.body.movID + "'");
+    res.json(allReviews.rows)
+    
+    
+    
+});
 
 app.listen(port, () => {
     console.log('Server running on port ' + port);
 });
+

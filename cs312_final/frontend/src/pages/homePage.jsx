@@ -1,4 +1,5 @@
 import NavBar from "../components/navBar";
+import MovieReviews from "../components/reviews";
 import { useNavigate, useLocation } from "react-router-dom";
 import MovieInfo from '../components/movieInfo';
 import { MovieRow } from "../components/movies.jsx";
@@ -18,8 +19,11 @@ function HomePage(props) {
         user: currUser
       }
       axios.post("http://localhost:8000/checkpref", info).then((res) => {
-        console.log("res: " + res.data.genre)
+        console.log("res: " + res.data.genre + " user: " + currUser)
+        if (currUser != null)
+        {
         navigate(`/questionaaire`, {state: {user: currUser}})
+        }
       })
     }
     const currMovie = 1;
@@ -64,8 +68,10 @@ function HomePage(props) {
         </div>
         <br />
         <br/>
-
+        
         <div className='reviews'>
+          <MovieReviews id={currMovie}/>
+          {/*
           <div id='review'>
             <div id='reviewTop'>
               <h2 id='reviewAuthor'>Author</h2>
@@ -83,6 +89,7 @@ function HomePage(props) {
               <p id='reviewPG'>hello this is a fake review this movie was amazing the CGI was so good!</p>
             </div>
           </div>
+          */}
         </div>
 
       </main>

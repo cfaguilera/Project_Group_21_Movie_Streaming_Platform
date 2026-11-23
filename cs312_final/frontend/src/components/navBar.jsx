@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function NavBar(props) {
   const navigate = useNavigate();
-  console.log(props.user)
   return (
     <div>
         <nav>
