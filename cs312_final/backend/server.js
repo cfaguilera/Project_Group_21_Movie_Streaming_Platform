@@ -83,6 +83,7 @@ app.post("/login", async (req, res) => {
 
 })
 
+    
 app.post("/checkpref", async (req, res) => {
     let checkPref = await streamDB.query("SELECT genrepref FROM users WHERE username='" + req.body.user + "'");
     console.log(checkPref.rows[0].genrepref);
