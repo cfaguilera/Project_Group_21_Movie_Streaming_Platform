@@ -6,7 +6,6 @@ function Questionnaire(props) {
     const navigate = useNavigate();
     const location = useLocation();
     const user = location.state.user;
-    console.log("=>" + location.state.user)
     return (
         <>
             <NavBar user={user}/>
